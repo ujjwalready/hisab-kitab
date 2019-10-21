@@ -26,7 +26,3 @@ Route::group([
         Route::get('user', 'AuthController@user');
     });
 });
-
-Route::get('test',function(){
-	echo "Hello"; die;
-});
