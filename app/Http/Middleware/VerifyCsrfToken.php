@@ -20,6 +20,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
     'api/*',
-    
+'https://tranquil-woodland-96149.herokuapp.com/'                       
   ];
 }
