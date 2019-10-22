@@ -27,3 +27,10 @@ Route::group([
         Route::get('user', 'AuthController@user');
     });
 });
+    Route::group([
+      'middleware' => 'cors',
+      'prefix' => 'field'
+    ], function() {
+        Route::get('create', 'UserExpenseCategoryController@create');
+    });
+

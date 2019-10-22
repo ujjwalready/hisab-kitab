@@ -59,6 +59,8 @@ class User extends Authenticatable
         'password', 'remember_token',
 
     ];
-
+    public function fields(){
+        return $this->hasMany('App\UserExpenseCategory', 'user_id', 'id');
+    }
 }
 
