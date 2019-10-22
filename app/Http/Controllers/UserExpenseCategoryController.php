@@ -17,6 +17,6 @@ class UserExpenseCategoryController extends Controller
     	return response()->json([
     		'success' => true,
     		'message' => "Field added successfully"
-    	])
+    	]);
     }
 }
