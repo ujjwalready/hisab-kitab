@@ -31,6 +31,6 @@ Route::group([
       'middleware' => 'cors',
       'prefix' => 'field'
     ], function() {
-        Route::get('create', 'UserExpenseCategoryController@create');
+        Route::post('create', 'UserExpenseCategoryController@create');
     });
 
