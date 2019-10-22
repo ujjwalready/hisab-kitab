@@ -17,7 +17,7 @@ Route::group([
     'prefix' => 'auth',
     'middleware' => 'cors'
 ], function () {
-    Route::post('login', 'AuthController@login');
+    Route::post('login', 'AuthController@login')->middleware('cors');
     Route::post('signup', 'AuthController@signup');
   
     Route::group([
