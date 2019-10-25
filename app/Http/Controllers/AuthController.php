@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use App\User;
 class AuthController extends Controller
@@ -25,7 +26,7 @@ class AuthController extends Controller
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => Hash::make($request->password)
         ]);
         $user->save();
         return response()->json([
@@ -50,12 +51,9 @@ class AuthController extends Controller
         //     'password' => 'required|string',
         //     'remember_me' => 'boolean'
         // ]);
-        $credentials = request(['email', 'password']);
-        // if(!Auth::attempt($credentials))
-        //     return response()->json([
-        //         'message' => 'Unauthorized'
-        //     ], 401);
-        $user = $request->user();
+        $user = User::where('email',$request->email)->first();
+        if(!empty($user)){
+            if(Hash::check($request->password, $user->password)){
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         if ($request->remember_me)
@@ -68,6 +66,18 @@ class AuthController extends Controller
                 $tokenResult->token->expires_at
             )->toDateTimeString()
         ]);
+            }else{
+        return response()->json([
+            'success' => false,
+            'message' => 'Unauthorized',
+        ]);
+
+    }
+    }
+        // if(!Auth::attempt($credentials))
+        //     return response()->json([
+        //         'message' => 'Unauthorized'
+        //     ], 401);
     }
   
     /**
