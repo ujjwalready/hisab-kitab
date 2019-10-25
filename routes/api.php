@@ -31,6 +31,7 @@ Route::group([
       'middleware' => 'cors',
       'prefix' => 'field'
     ], function() {
-        Route::post('create', 'UserExpenseCategoryController@create');
+        Route::post('create', 'UserExpenseCategoryController@create')->middleware('cors');
+        Route::post('list', 'UserExpenseCategoryController@getAllFields');
     });
 
