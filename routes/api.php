@@ -19,6 +19,7 @@ Route::group([
 ], function () {
     Route::post('login', 'AuthController@login')->middleware('cors');
     Route::post('signup', 'AuthController@signup');
+    Route::post('create', 'UserExpenseCategoryController@create')->middleware('cors');
   
     Route::group([
       'middleware' => ['auth:api','cors']
@@ -31,7 +32,6 @@ Route::group([
       'middleware' => 'cors',
       'prefix' => 'field'
     ], function() {
-        Route::post('create', 'UserExpenseCategoryController@create')->middleware('cors');
         Route::post('list', 'UserExpenseCategoryController@getAllFields');
     });
 
